@@ -1,0 +1,12 @@
+{
+  "name": "#(faker.company().name())",
+  "status": "#(faker.number().randomNumber())",
+  "description": "cop",
+  "contactDetails": [
+    {
+      "detailType": "Office",
+      "email": "example@example.com",
+      "phone": "#(faker.phoneNumber().cellPhone())"
+    }
+  ]
+}
