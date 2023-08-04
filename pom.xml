@@ -7,7 +7,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.wickedagile.apis.reference</groupId>
-	<artifactId>reactiveOpenAPIMongo-matt</artifactId>
+	<artifactId>reactiveOpenAPIMongoKarate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring Reactive OpenAPI MOngoDB Reference</name>
 	<description>Reference project for building a reactive service using Spring, OpenAPI, MongoDB and Events</description>
