@@ -51,11 +51,5 @@ bdd-for-all:
     features: "src/test/resources/features"
     publish:
       quiet: true
-test:
-  expected:
-    updates: 2
-    inserts: 5
-    deletes: 1
-    reads: 6
 lombok:
   addLombokGeneratedAnnotation: true

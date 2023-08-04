@@ -14,11 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 class BareKarateTests {
 	
 
+	// Simple (single) test without spring, so it's much faster to run. Could be used to test commands that do not require it. 
 	@Karate.Test
 	Karate testGetFeatures() {
+		// http://dius.github.io/java-faker/apidocs/index.html
+		// Area for testing out faker library
 		Faker faker = new com.github.javafaker.Faker();
 		String companyName = faker.company().name();
-		
+		//////////////////////////////////////////////////////		
 		return Karate.run("classpath:features/bare.feature").relativeTo(getClass());
 	}
 
