@@ -21,6 +21,7 @@ class BareKarateTests {
 		// Area for testing out faker library
 		Faker faker = new com.github.javafaker.Faker();
 		String companyName = faker.company().name();
+		String phone = faker.phoneNumber().cellPhone();
 		//////////////////////////////////////////////////////		
 		return Karate.run("classpath:features/bare.feature").relativeTo(getClass());
 	}
