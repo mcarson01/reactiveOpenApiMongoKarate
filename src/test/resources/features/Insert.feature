@@ -29,14 +29,13 @@ Feature: Testing out INSERT operations for the API
   ## Example using table  
   @Positive @SmokeTest  
   Scenario: Create an entity with dynamic values - INSERT2
-    * def companyName = faker.company().name()
-    * print 'companyName ' + companyName
-    * table requestTable
-		| name            | position  | description                  | contactDetails                                                                             |
-		| companyName     | 'CEO'     | faker.company().bs()         | [{detailType: 'Office', email: 'test@test.com', phone: 303-542-8795}] |	 
-    * print 'requestTable json\n', karate.pretty(requestTable[0])
     Given path '/vendor'
-    When request requestTable[0]
+	    And def companyName = faker.company().name()
+	    And table payload
+			| name            | position  | description                  | contactDetails                                                        |
+			| companyName     | 'CEO'     | faker.company().bs()         | [{detailType: 'Office', email: 'test@test.com', phone: 303-542-8795}] |	 
+	    And print 'INSERT2 - payload json\n', karate.pretty(payload[0])
+    When request payload[0]
     	And method post
     Then status 200
     	And match response.name == companyName
@@ -47,19 +46,18 @@ Feature: Testing out INSERT operations for the API
   ## example, this would be 3 rows: | path    | 0     | 1     | 2     |
   @Positive @SmokeTest  
   Scenario: Create an entity with dynamic values - INSERT3
-    * def companyName = faker.company().name()
-    * def description = faker.company().bs()
-    * print 'companyName ' + companyName
-    * set payload
-    | path                           | value                             |
-    | name                           | companyName                       |
-    | position                       | 'CEO'                             |
-    | description                    | description                       |
-    | contactDetails[0].detailType   | 'Office'                          |
-    | contactDetails[0].email        | 'test@test.com'                   |
-    | contactDetails[0].phone        | '758-879-5564'                    |
-    * print 'payload json\n', karate.pretty(payload)
     Given path '/vendor'
+	    And def companyName = faker.company().name()
+	    And def description = faker.company().bs()
+	    And set payload
+	    | path                           | value                             |
+	    | name                           | companyName                       |
+	    | position                       | 'CEO'                             |
+	    | description                    | description                       |
+	    | contactDetails[0].detailType   | 'Office'                          |
+	    | contactDetails[0].email        | 'test@test.com'                   |
+	    | contactDetails[0].phone        | '758-879-5564'                    |
+	    And print 'INSERT3 - payload json\n', karate.pretty(payload)
     When request payload
     	And method post
     Then status 200
@@ -71,11 +69,11 @@ Feature: Testing out INSERT operations for the API
   ## showcases another way to match returned elements in list    
   @Negative @SmokeTest  
   Scenario: Create an entity with dynamic values - INSERT4
-    * table requestTable
+    Given path '/vendor'
+    And table payload
 		| name                       | description          |
 		| faker.company().name()     | faker.company().bs() | 	 
-    Given path '/vendor'
-    When request requestTable[0]
+    When request payload[0]
     	And method post
     Then status 406
 	    And match response[0].code contains "contactDetails"

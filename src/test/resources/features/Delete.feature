@@ -5,20 +5,20 @@ Feature: Testing out INSERT operations for the API
 
   @Negative
   Scenario: Update non-nested element - DELETE1
-  	* def intputJson = karate.read('classpath:data/payload.json')
-  	* print "request: ", intputJson
     Given path '/vendor/xxxxxxxxxxxxxxx'
-    	And request intputJson
+    	And def payload = karate.read('classpath:data/payload.json')
+    	And print "DELETE1 - payload: ", payload
+    	And request payload
     When method delete
     Then status 404
 		And match response[0].message == "Not Found"
 
   @Positive
   Scenario: Update non-nested element - DELETE2
-    * def intputJson = karate.read('classpath:data/payload.json')
-  	* print "request: ", intputJson
     Given path '/vendor'
-    	And request intputJson
+    	And def payload = karate.read('classpath:data/payload.json')
+    	And print "DELETE2 - payload: ", payload
+    	And request payload
     When method post
     Then status 200
     	And print "response: ", response

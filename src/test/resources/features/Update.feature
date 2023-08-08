@@ -6,19 +6,20 @@ Feature: Testing out INSERT operations for the API
   ## showcases pulling json from a file
   @Positive
   Scenario: Update non-nested element - UPDATE1
-  	* def intputJson = karate.read('classpath:data/payload.json')
-  	* print "request: ", intputJson
-  	* def newName = "Uber Jars"
     Given path '/vendor'
-    	And request intputJson
+    	And def payload = karate.read('classpath:data/payload.json')
+    	And print "UPDATE1 - payload: ", payload
+    	And request payload
     When method post
     Then status 200
-    	And print "response: ", response
+    	And print "UPDATE1 - response: ", response
+    * print "UPDATE1 - Starting new request..."
     Given path '/vendor/'+response.id
-	    And set intputJson.name = newName
-	    And request intputJson
+	    And def newName = "Uber Jars"
+	    And set payload.name = newName
+	    And request payload
 	    And header Content-Type = 'application/json'
-	    And print "New Request", intputJson
+	    And print "UPDATE1 - New Request", payload
     When method post
 	Then status 200
 	    And match response.name == newName
@@ -27,29 +28,29 @@ Feature: Testing out INSERT operations for the API
   ## showcases...
   @Positive
   Scenario: Update non-nested element - UPDATE2
-    * def intputJson = karate.read('classpath:data/payload.json')
-  	* print "request: ", intputJson
-  	* def newName = "Uber Jars"
   	Given path '/vendor'
-  		And request intputJson
+  		And def payload = karate.read('classpath:data/payload.json')
+  		And print "UPDATE2 - payload: ", payload
+  		And request payload
     When method post
     Then status 200
-    	And print "response: ", response
+    	And print "UPDATE2 - response: ", response
     Given path '/vendor/'+response.id
-	    And set intputJson.name = newName
-	    And request intputJson
+	    And def newName = "Uber Jars"
+	    And set payload.name = newName
+	    And request payload
 	    And header Content-Type = 'application/json'
-	    And print "New Request", intputJson
+	    And print "UPDATE2 - New Request", payload
     When method post
     Then status 200
 	    And match response.name == newName
     
   @Negative
-  Scenario: Attempt update with invalid ID - UPDATE3
-    * def intputJson = karate.read('classpath:data/payload.json')
-  	* print "request: ", intputJson  
+  Scenario: Attempt update with invalid ID - UPDATE3 
   	Given path '/vendor/xxxxxxxxxxxxxxx'
-	  	And request intputJson
+  		And def payload = karate.read('classpath:data/payload.json')
+  		And print "UPDATE3 - payload: ", payload
+	  	And request payload
     When method post
     Then status 404
 	    And match response[0].message == "Not Found"
