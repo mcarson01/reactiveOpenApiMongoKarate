@@ -4,7 +4,7 @@ Feature: Testing out INSERT operations for the API
     * url 'http://localhost:8080'
 
   ## This example uses inline JSON
-  @Negative
+  @Negative @All
   Scenario: Insert fails, invalid email
     Given path '/vendor'
     When request 
@@ -27,7 +27,7 @@ Feature: Testing out INSERT operations for the API
     	And match response[0].code == "contactDetails[].email"
 
   ## Example using table  
-  @Positive @SmokeTest  
+  @Positive @All
   Scenario: Create an entity with dynamic values - INSERT2
     Given path '/vendor'
 	    And def companyName = faker.company().name()
@@ -44,7 +44,7 @@ Feature: Testing out INSERT operations for the API
   ## Example using set
   ## Note, multiple json rows can be added to the set by replacing 'value' with an index, starting with 0
   ## example, this would be 3 rows: | path    | 0     | 1     | 2     |
-  @Positive @SmokeTest  
+  @Positive @Smoke @All
   Scenario: Create an entity with dynamic values - INSERT3
     Given path '/vendor'
 	    And def companyName = faker.company().name()
@@ -67,7 +67,7 @@ Feature: Testing out INSERT operations for the API
 
   ## Uses data table view and
   ## showcases another way to match returned elements in list    
-  @Negative @SmokeTest  
+  @Negative @All
   Scenario: Create an entity with dynamic values - INSERT4
     Given path '/vendor'
     And table payload

@@ -3,11 +3,13 @@ Feature: Testing out GET operations for the API
   Background:
     * url 'http://localhost:8080'
 
+  @Negative @All
   Scenario: Can't find the entity - GET1
     Given path '/vendor/XXXXXX'
     When method Get
     Then status 404
     
+  @Positive @Smoke @All
   Scenario: Found the entity - GET2
     Given path '/vendor'
     When request 

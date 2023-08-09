@@ -4,7 +4,7 @@ Feature: Testing out INSERT operations for the API
     * url 'http://localhost:8080'
 
   ## showcases pulling json from a file
-  @Positive
+  @Positive @Smoke @All
   Scenario: Update non-nested element - UPDATE1
     Given path '/vendor'
     	And def payload = karate.read('classpath:data/payload.json')
@@ -26,7 +26,7 @@ Feature: Testing out INSERT operations for the API
 
 
   ## showcases...
-  @Positive
+  @Positive @All
   Scenario: Update non-nested element - UPDATE2
   	Given path '/vendor'
   		And def payload = karate.read('classpath:data/payload.json')
@@ -45,7 +45,7 @@ Feature: Testing out INSERT operations for the API
     Then status 200
 	    And match response.name == newName
     
-  @Negative
+  @Negative @All
   Scenario: Attempt update with invalid ID - UPDATE3 
   	Given path '/vendor/xxxxxxxxxxxxxxx'
   		And def payload = karate.read('classpath:data/payload.json')

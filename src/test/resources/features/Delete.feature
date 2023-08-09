@@ -3,7 +3,7 @@ Feature: Testing out INSERT operations for the API
   Background:
     * url 'http://localhost:8080'
 
-  @Negative
+  @Negative @All
   Scenario: Update non-nested element - DELETE1
     Given path '/vendor/xxxxxxxxxxxxxxx'
     	And def payload = karate.read('classpath:data/payload.json')
@@ -13,7 +13,7 @@ Feature: Testing out INSERT operations for the API
     Then status 404
 		And match response[0].message == "Not Found"
 
-  @Positive
+  @Positive @Smoke @All
   Scenario: Update non-nested element - DELETE2
     Given path '/vendor'
     	And def payload = karate.read('classpath:data/payload.json')
