@@ -44,7 +44,7 @@ Feature: Testing out INSERT operations for the API
   ## Example using set
   ## Note, multiple json rows can be added to the set by replacing 'value' with an index, starting with 0
   ## example, this would be 3 rows: | path    | 0     | 1     | 2     |
-  @Positive @Smoke @All
+  @Positive @All
   Scenario: Create an entity with dynamic values - INSERT3
     Given path '/vendor'
 	    And def companyName = faker.company().name()

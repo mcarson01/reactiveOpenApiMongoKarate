@@ -22,7 +22,7 @@ class KarateTests {
 	// all tests in parallel example. Adjust the threads to match the number of features.
 	@Test
 	public void testAllFeatures() {
-		Results results = Runner.path("classpath:features").tags("All").parallel(12);
+		Results results = Runner.path("classpath:features").tags("All").parallel(2);
 		assertTrue(results.getFailCount() == 0, results.getErrorMessages());
 	}
 
